@@ -1,0 +1,71 @@
+#  <#Title#>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <!-- Usamos Chart.js desde internet -->
+    <script src="chartjs.js"></script>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 95vh;
+            margin: 0;
+            padding: 10px;
+            background-color: transparent;
+        }
+        canvas {
+            max-width: 100%;
+            max-height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="myBarChart"></canvas>
+
+    <script>
+        // Esta función será llamada desde Objective-C
+        function drawChart(labels, data) {
+            const ctx = document.getElementById('myBarChart').getContext('2d');
+            
+            // Si el valor es <= 0 (ahorro) usa verde, si no rojo
+            const backgroundColors = data.map(value => (value <= 0 ? 'green' : 'red'));
+
+            // Configuración global de letra grande
+            Chart.defaults.font.size = 14;
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Huella de CO2 por día (kg)',
+                        data: data,
+                        backgroundColor: backgroundColors,
+                        borderColor: backgroundColors,
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    scales: {
+                        y: {
+                            beginAtZero: false
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                font: { size: 14 }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
