@@ -1,7 +1,4 @@
-//
-//  HistoryChartViewController.m
-//  Proyecto02
-//
+
 
 #import "HistoryChartViewController.h"
 #import "CarbonCalculator.h"
@@ -16,7 +13,6 @@
 
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
-    // DIAGNÓSTICO: Verificar si el WebView tiene tamaño
     if (self.webView.frame.size.width == 0 || self.webView.frame.size.height == 0) {
         NSLog(@"⚠️ ADVERTENCIA CRÍTICA: El WebView tiene tamaño 0. ¡Faltan Constraints en el Storyboard!");
     } else {
@@ -36,9 +32,6 @@
 }
 
 - (void)loadChartData {
-    // ... (Tu código de carga de datos estaba perfecto, déjalo igual) ...
-    // Solo copiaré la parte importante para ahorrar espacio
-    
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"T_Registros"];
     [request setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES]]];
     
